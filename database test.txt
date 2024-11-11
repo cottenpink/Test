@@ -1,0 +1,40 @@
+<!DOCTYPE HTML >
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.io.*" %> 
+
+<html> 
+<head> 
+<title>Connection with mysql database</title> 
+</head> 
+<body>
+<h1>Connection status </h1>
+<% 
+try {
+String connectionURL = "jdbc:mysql://localhost:3306/mydb"; 
+// declare a connection by using Connection interface 
+Connection connection = null; 
+// Load JBBC driver "com.mysql.jdbc.Driver" 
+Class.forName("com.mysql.jdbc.Driver").newInstance(); 
+
+connection = DriverManager.getConnection(connectionURL, "root", "");
+// check weather connection is established or not by isClosed() method 
+if(!connection.isClosed())
+%>
+<font size="3" color="green"></b>
+<% 
+
+out.println("Successfully connected to " + "MySQL server using TCP/IP...");
+connection.close();
+}
+catch(Exception ex){
+%>
+</font>
+<font size="3" color="red"></b>
+<%
+out.println(ex);
+out.println("Unable to connect to database.");
+}
+%>
+</font>
+</body> 
+</html>
